@@ -1,34 +1,52 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const DataGather = () => {
   const userID = localStorage.getItem('userID');
-  const token = localStorage.getItem('token');
+  const token = 'Bearer '.concat(localStorage.getItem('token'));
+
+  const [aqiData, setAQIdata] = useState({
+    aqi: 0,
+    city: '',
+    time: '',
+    aqiPref: 0,
+    location: '',
+    message: '',
+  });
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/users/getAQIdata/${userID}`, {
+      .get(`http://localhost:8080/api/aqi/getAQIdata/${userID}`, {
         headers: {
-          authorization: `Bearer ${token}`,
+          authorization: token,
         },
       })
       .then((response) => {
-        console.log(response);
+        setAQIdata({
+          ...aqiData,
+          aqi: response.data.aqiData.aqi,
+          city: response.data.aqiData.city.name,
+          time: response.data.aqiData.time.s,
+          aqiPref: response.data.aqiPref,
+          location: response.data.location,
+          message: response.data.message,
+        });
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, [userID, token]);
 
   return (
     <>
-      {/* <div style={aqi > 50 ? { color: 'red' } : { color: 'green' }}>Your current air quality is: {aqi}</div> */}
-
-      {/* <div>
-        {
-          ? `Air quality in is higher then your set level`
-          : `Air quality in is lower then your set level`}
-      </div> */}
+      <h1>{aqiData.message}</h1>
+      <h2>{aqiData.location.toUpperCase()}</h2>
+      {aqiData.aqi !== 0 && (
+        <h3 style={aqiData.aqi > aqiData.aqiPref ? { color: 'red' } : { color: 'green' }}>
+          {aqiData.location.toUpperCase()}'s air quality level is {aqiData.aqi} which is &nbsp;
+          {aqiData.aqi > aqiData.aqiPref ? 'higher' : 'lower'} then your alert level of {aqiData.aqiPref}
+        </h3>
+      )}
     </>
   );
 };

@@ -1,0 +1,25 @@
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #06a5ca;
+  top: 0;
+  width: 100%;
+  .navLink {
+    float: left;
+    border: 1px solid black;
+    color: black;
+    text-decoration: none;
+    padding: 0 50px 0 50px;
+    height: 30px;
+
+    &:hover {
+      background-color: white;
+      cursor: pointer;
+    }
+  }
+}

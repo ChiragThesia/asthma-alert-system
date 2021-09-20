@@ -12,18 +12,26 @@ const Signup = () => {
   });
   const history = useHistory();
 
+  const userSignup = () => {
+    axios
+      .post('http://localhost:8080/api/users/signup', { user })
+      .then((response) => {
+        localStorage.setItem('token', response.data.user.token);
+        localStorage.setItem('userID', response.data.user.id);
+        history.push('/aqi');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <h1>Sing Up!</h1>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          axios.post('http://localhost:8080/api/users/signup', { user }).then((response) => {
-            console.log('AXIOS Response', response);
-            localStorage.setItem('token', response.data.user.token);
-            localStorage.setItem('userID', response.data.user.id);
-            history.push('/aqi');
-          });
+          userSignup();
         }}
       >
         <fieldset>

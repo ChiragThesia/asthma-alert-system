@@ -9,21 +9,26 @@ const Login = () => {
   });
   const history = useHistory();
 
+  const userLogin = () => {
+    axios
+      .post('http://localhost:8080/api/users/login', { user })
+      .then((response) => {
+        localStorage.setItem('token', response.data.user.token);
+        localStorage.setItem('userID', response.data.user.id);
+        history.push('/aqi');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
+      <h1>Login</h1>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          axios
-            .post('http://localhost:8080/api/users/login', { user })
-            .then((response) => {
-              localStorage.setItem('token', response.data.user.token);
-              localStorage.setItem('userID', response.data.user.id);
-              history.push('/aqi');
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          userLogin();
         }}
       >
         <fieldset>
