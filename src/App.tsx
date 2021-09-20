@@ -4,8 +4,8 @@ import Toolbar from '@mui/material/Toolbar';
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import DataGather from './components/AQICenter';
-import Login from './components/Login';
 import Signup from './components/Signup';
+import TestLogin from './components/testLogin';
 import PrivateRoute from './util/privateRoute';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
           )}
           {!localStorage.getItem('token') && (
             <Button variant='contained' color='inherit'>
-              <Link className='navLink' to='/login' text-decoration='none'>
+              <Link className='navLink' to='/login'>
                 Login
               </Link>
             </Button>
@@ -49,7 +49,8 @@ function App() {
           <Signup />
         </Route>
         <Route exact path='/login'>
-          <Login />
+          <TestLogin />
+          {/* <Login /> */}
         </Route>
         <PrivateRoute exact path='/aqi' component={DataGather} />
       </Switch>

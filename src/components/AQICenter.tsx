@@ -22,19 +22,21 @@ const DataGather = () => {
         },
       })
       .then((response) => {
+        console.log('CITY Name', response.data);
         setAQIdata({
           ...aqiData,
-          aqi: response.data.aqiData.aqi,
-          city: response.data.aqiData.city.name,
-          time: response.data.aqiData.time.s,
-          aqiPref: response.data.aqiPref,
-          location: response.data.location,
-          message: response.data.message,
+          aqi: response?.data?.aqiData?.aqi,
+          city: response?.data?.city?.name,
+          time: response?.data?.aqiData?.time?.s,
+          aqiPref: response?.data?.aqiPref,
+          location: response?.data?.location,
+          message: response?.data?.message,
         });
       })
       .catch((error) => {
         console.log(error);
       });
+    // eslint-disable-next-line
   }, [userID, token]);
 
   return (
