@@ -10,27 +10,27 @@ const NavBar = (props) => {
   const handleLogout = () => {
     localStorage.clear();
   };
-
+  const URL = 'https://asthma-alert-production.herokuapp.com/';
   return (
     <div className='navbar'>
       <AppBar position='static'>
         <Toolbar>
           <h2 className='title'>AirQuality Alert System</h2>
-          {window.location.href === 'https://astma-alert-staging.herokuapp.com/aqi' ? (
+          {window.location.href === `${URL}/aqi` ? (
             <Button variant='contained' color='inherit' className='navLink'>
               <Link href='/' style={{ textDecoration: 'none', color: 'black' }} onClick={handleLogout}>
                 Logout
               </Link>
             </Button>
           ) : null}
-          {window.location.href == 'https://astma-alert-staging.herokuapp.com/' && (
+          {window.location.href == `${URL}/` && (
             <Button variant='contained' color='inherit' className='navLink'>
               <Link href='/signup' style={{ textDecoration: 'none', color: 'black' }}>
                 Signup
               </Link>
             </Button>
           )}
-          {window.location.href === 'https://astma-alert-staging.herokuapp.com/signup' ? (
+          {window.location.href === `${URL}/signup` ? (
             <Button variant='contained' color='inherit' className='navLink'>
               <Link href='/' style={{ textDecoration: 'none', color: 'black' }}>
                 Login
