@@ -43,7 +43,7 @@ export default function Login() {
   };
 
   const userSignup = () => {
-    axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'https://asthma-alert-server-production.herokuapp.com/';
     axios
       .post('/api/users/login', { user })
       .then((response) => {

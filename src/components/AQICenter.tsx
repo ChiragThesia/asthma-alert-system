@@ -1,7 +1,3 @@
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../styles/AqiData.css';
@@ -42,7 +38,7 @@ const AQIData = () => {
   };
 
   useEffect(() => {
-    axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'https://asthma-alert-server-production.herokuapp.com/';
     axios
       .get(`/api/aqi/getAQIdata/${userID}`, {
         headers: {
@@ -69,7 +65,7 @@ const AQIData = () => {
   const updatedUserPref = () => {
     console.log('USER', user);
 
-    axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'https://asthma-alert-server-production.herokuapp.com/';
     axios
       .put(
         `/api/users/updateUser/${userID}`,
@@ -99,7 +95,7 @@ const AQIData = () => {
               {aqiData.aqi > aqiData.aqiPref ? 'higher' : 'lower'} then your alert level of {aqiData.aqiPref}
             </h3>
           </fieldset>
-
+          {/* 
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -142,7 +138,7 @@ const AQIData = () => {
             <Button variant='contained' type='submit' className='SubmitChange'>
               Updated Preferences
             </Button>
-          </form>
+          </form> */}
         </div>
       )}
     </div>
