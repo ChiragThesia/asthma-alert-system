@@ -51,6 +51,7 @@ export default function Login() {
         localStorage.setItem('token', response.data.user.token);
         localStorage.setItem('userID', response.data.user.id);
         history.push('/aqi');
+        window.location.reload();
       })
       .catch((response) => {
         console.log('RESPONSE', response);

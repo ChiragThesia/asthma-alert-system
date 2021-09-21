@@ -55,6 +55,7 @@ export default function Signup() {
         localStorage.setItem('token', response.data.user.token);
         localStorage.setItem('userID', response.data.user.id);
         history.push('/aqi');
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -138,6 +139,7 @@ export default function Signup() {
                 }}
                 label='AQI Alert Level'
                 required
+                type='number'
               />
             </FormControl>
             <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
