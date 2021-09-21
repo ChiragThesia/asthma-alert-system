@@ -10,6 +10,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import '../styles/Signup.css';
 
 interface State {
   username: string;
@@ -33,7 +34,6 @@ export default function Signup() {
 
   const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [prop]: event.target.value });
-    console.log('USER', user);
   };
 
   const handleClickShowPassword = () => {
@@ -48,8 +48,9 @@ export default function Signup() {
   };
 
   const userSignup = () => {
+    axios.defaults.baseURL = 'http://localhost:8080';
     axios
-      .post('https://alert-asthma-server-staging.herokuapp.com/api/users/signup', { user })
+      .post('/api/users/signup', { user })
       .then((response) => {
         localStorage.setItem('token', response.data.user.token);
         localStorage.setItem('userID', response.data.user.id);
@@ -61,96 +62,104 @@ export default function Signup() {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          userSignup();
-        }}
-      >
-        <div>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-            <InputLabel htmlFor='outlined-adornment-username'>Username</InputLabel>
-            <OutlinedInput
-              id='outlined-adornment-username'
-              value={user.username}
-              onChange={handleChange('username')}
-              aria-describedby='outlined-username-helper-text'
-              inputProps={{
-                'aria-label': 'username',
-              }}
-              label='Username'
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-            <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
-            <OutlinedInput
-              id='outlined-adornment-email'
-              value={user.email}
-              onChange={handleChange('email')}
-              aria-describedby='outlined-email-helper-text'
-              inputProps={{
-                'aria-label': 'email',
-              }}
-              label='Email'
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-            <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
-            <OutlinedInput
-              id='outlined-adornment-password'
-              type={user.showPassword ? 'text' : 'password'}
-              value={user.password}
-              onChange={handleChange('password')}
-              endAdornment={
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='toggle password visibility'
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge='end'
-                  >
-                    {user.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label='Password'
-            />
-          </FormControl>
-        </div>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap' }} className='formBox'>
+      <fieldset>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            userSignup();
+          }}
+          className='signupForm'
+        >
+          <div className='formInput'>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+              <InputLabel htmlFor='outlined-adornment-username'>Username</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-username'
+                value={user.username}
+                onChange={handleChange('username')}
+                aria-describedby='outlined-username-helper-text'
+                inputProps={{
+                  'aria-label': 'username',
+                }}
+                label='Username'
+                required
+              />
+            </FormControl>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+              <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-email'
+                value={user.email}
+                onChange={handleChange('email')}
+                aria-describedby='outlined-email-helper-text'
+                inputProps={{
+                  'aria-label': 'email',
+                }}
+                label='Email'
+                required
+              />
+            </FormControl>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+              <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-password'
+                type={user.showPassword ? 'text' : 'password'}
+                value={user.password}
+                onChange={handleChange('password')}
+                endAdornment={
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='toggle password visibility'
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge='end'
+                    >
+                      {user.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label='Password'
+                required
+              />
+            </FormControl>
+          </div>
 
-        <div>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-            <InputLabel htmlFor='outlined-adornment-aqiAlertlevel'>AQI Alert Level</InputLabel>
-            <OutlinedInput
-              id='outlined-adornment-aqiAlertlevel'
-              value={user.aqiAlertLevel}
-              onChange={handleChange('aqiAlertLevel')}
-              aria-describedby='outlined-aqiAlertlevel-helper-text'
-              inputProps={{
-                'aria-label': 'aqiAlertlevel',
-              }}
-              label='AQI Alert Level'
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-            <InputLabel htmlFor='outlined-adornment-location'>Location</InputLabel>
-            <OutlinedInput
-              id='outlined-adornment-location'
-              value={user.location}
-              onChange={handleChange('location')}
-              aria-describedby='outlined-location-helper-text'
-              inputProps={{
-                'aria-label': 'location',
-              }}
-              label='Location'
-            />
-          </FormControl>
-        </div>
-        <Button variant='contained' type='submit'>
-          Create User
-        </Button>
-      </form>
+          <div>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+              <InputLabel htmlFor='outlined-adornment-aqiAlertlevel'>AQI Alert Level</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-aqiAlertlevel'
+                value={user.aqiAlertLevel}
+                onChange={handleChange('aqiAlertLevel')}
+                aria-describedby='outlined-aqiAlertlevel-helper-text'
+                inputProps={{
+                  'aria-label': 'aqiAlertlevel',
+                }}
+                label='AQI Alert Level'
+                required
+              />
+            </FormControl>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+              <InputLabel htmlFor='outlined-adornment-location'>Location</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-location'
+                value={user.location}
+                onChange={handleChange('location')}
+                aria-describedby='outlined-location-helper-text'
+                inputProps={{
+                  'aria-label': 'location',
+                }}
+                label='Location'
+                required
+              />
+            </FormControl>
+          </div>
+          <Button variant='contained' type='submit' className='createUserButton'>
+            Create User
+          </Button>
+        </form>
+      </fieldset>
     </Box>
   );
 }

@@ -1,0 +1,12 @@
+.formBox {
+  padding-top: 20px;
+}
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .createUserButton {
+    margin-top: 20px;
+  }
+}

@@ -41,8 +41,9 @@ export default function Login() {
   };
 
   const userSignup = () => {
+    axios.defaults.baseURL = 'http://localhost:8080';
     axios
-      .post('https://alert-asthma-server-staging.herokuapp.com/api/users/login', { user })
+      .post('/api/users/login', { user })
       .then((response) => {
         localStorage.setItem('token', response.data.user.token);
         localStorage.setItem('userID', response.data.user.id);
@@ -54,54 +55,59 @@ export default function Login() {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          userSignup();
-        }}
-      >
-        <div>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-            <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
-            <OutlinedInput
-              id='outlined-adornment-email'
-              value={user.email}
-              onChange={handleChange('email')}
-              aria-describedby='outlined-email-helper-text'
-              inputProps={{
-                'aria-label': 'email',
-              }}
-              label='Email'
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-            <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
-            <OutlinedInput
-              id='outlined-adornment-password'
-              type={user.showPassword ? 'text' : 'password'}
-              value={user.password}
-              onChange={handleChange('password')}
-              endAdornment={
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='toggle password visibility'
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge='end'
-                  >
-                    {user.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label='Password'
-            />
-          </FormControl>
-        </div>
-        <Button variant='contained' type='submit'>
-          Login
-        </Button>
-      </form>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap' }} className='formBox'>
+      <fieldset>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            userSignup();
+          }}
+          className='signupForm'
+        >
+          <div>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+              <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-email'
+                value={user.email}
+                onChange={handleChange('email')}
+                aria-describedby='outlined-email-helper-text'
+                inputProps={{
+                  'aria-label': 'email',
+                }}
+                label='Email'
+                required
+              />
+            </FormControl>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+              <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-password'
+                type={user.showPassword ? 'text' : 'password'}
+                value={user.password}
+                onChange={handleChange('password')}
+                endAdornment={
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='toggle password visibility'
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge='end'
+                    >
+                      {user.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label='Password'
+                required
+              />
+            </FormControl>
+          </div>
+          <Button variant='contained' type='submit'>
+            Login
+          </Button>
+        </form>
+      </fieldset>
     </Box>
   );
 }
