@@ -11,42 +11,29 @@ const NavBar = (props) => {
     localStorage.clear();
   };
 
-  if (props.isAuth == null) {
-    return (
-      <div className='navbar'>
-        <AppBar position='static'>
-          <Toolbar>
-            <h2 className='title'>AirQuality Alert System</h2>
-            <Button variant='contained' color='inherit' className='navLink'>
-              <Link href='/login' style={{ textDecoration: 'none', color: 'black' }}>
-                Login
-              </Link>
-            </Button>
-            <Button variant='contained' color='inherit' className='navLink'>
-              <Link href='/signup' style={{ textDecoration: 'none', color: 'black' }}>
-                Signup
-              </Link>
-            </Button>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  } else {
-    return (
-      <div className='navbar'>
-        <AppBar position='static'>
-          <Toolbar>
-            <h2 className='title'>AirQuality Alert System</h2>
+  return (
+    <div className='navbar'>
+      <AppBar position='static'>
+        <Toolbar>
+          <h2 className='title'>AirQuality Alert System</h2>
+
+          {localStorage.getItem('token') && (
             <Button variant='contained' color='inherit' className='navLink'>
               <Link href='/login' style={{ textDecoration: 'none', color: 'black' }} onClick={handleLogout}>
                 Logout
               </Link>
             </Button>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
+          )}
+
+          <Button variant='contained' color='inherit' className='navLink'>
+            <Link href='/signup' style={{ textDecoration: 'none', color: 'black' }}>
+              Signup
+            </Link>
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 };
 
 export default NavBar;
