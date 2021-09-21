@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const DataGather = () => {
+const AQIData = () => {
   const userID = localStorage.getItem('userID');
   const token = 'Bearer '.concat(localStorage.getItem('token'));
 
@@ -22,7 +22,6 @@ const DataGather = () => {
         },
       })
       .then((response) => {
-        console.log('CITY Name', response.data);
         setAQIdata({
           ...aqiData,
           aqi: response?.data?.aqiData?.aqi,
@@ -53,4 +52,4 @@ const DataGather = () => {
   );
 };
 
-export default DataGather;
+export default AQIData;

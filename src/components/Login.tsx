@@ -1,15 +1,46 @@
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
-const Login = () => {
-  const [user, setUser] = useState({
+interface State {
+  email: string;
+  password: string;
+  showPassword: boolean;
+}
+
+export default function Login() {
+  const [user, setUser] = useState<State>({
     email: '',
     password: '',
+    showPassword: false,
   });
   const history = useHistory();
 
-  const userLogin = () => {
+  const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setUser({
+      ...user,
+      showPassword: !user.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
+  const userSignup = () => {
     axios
       .post('http://localhost:8080/api/users/login', { user })
       .then((response) => {
@@ -23,41 +54,54 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1>Login</h1>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          userLogin();
+          userSignup();
         }}
       >
-        <fieldset>
-          <label>&nbsp; Enter your email: &nbsp; </label>
-          <input
-            type='email'
-            onChange={(event) => {
-              event.preventDefault();
-              const emailData = event?.target?.value;
-              setUser({ ...user, email: emailData });
-            }}
-          />
-          <label> &nbsp; Enter your password: &nbsp; </label>
-          <input
-            name='password'
-            type='password'
-            onChange={(event) => {
-              event.preventDefault();
-              const passwordData = event?.target?.value;
-              setUser({ ...user, password: passwordData });
-            }}
-          />
-          <button className='submitButton' type='submit'>
-            Login
-          </button>
-        </fieldset>
+        <div>
+          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+            <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
+            <OutlinedInput
+              id='outlined-adornment-email'
+              value={user.email}
+              onChange={handleChange('email')}
+              aria-describedby='outlined-email-helper-text'
+              inputProps={{
+                'aria-label': 'email',
+              }}
+              label='Email'
+            />
+          </FormControl>
+          <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+            <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+            <OutlinedInput
+              id='outlined-adornment-password'
+              type={user.showPassword ? 'text' : 'password'}
+              value={user.password}
+              onChange={handleChange('password')}
+              endAdornment={
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='toggle password visibility'
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge='end'
+                  >
+                    {user.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label='Password'
+            />
+          </FormControl>
+        </div>
+        <Button variant='contained' type='submit'>
+          Login
+        </Button>
       </form>
-    </>
+    </Box>
   );
-};
-
-export default Login;
+}
