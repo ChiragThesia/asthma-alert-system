@@ -16,21 +16,21 @@ const NavBar = (props) => {
       <AppBar position='static'>
         <Toolbar>
           <h2 className='title'>AirQuality Alert System</h2>
-          {window.location.href === 'http://localhost:3000/aqi' ? (
+          {window.location.href === 'https://astma-alert-staging.herokuapp.com/aqi' ? (
             <Button variant='contained' color='inherit' className='navLink'>
               <Link href='/' style={{ textDecoration: 'none', color: 'black' }} onClick={handleLogout}>
                 Logout
               </Link>
             </Button>
           ) : null}
-          {window.location.href == 'http://localhost:3000/' && (
+          {window.location.href == 'https://astma-alert-staging.herokuapp.com/' && (
             <Button variant='contained' color='inherit' className='navLink'>
               <Link href='/signup' style={{ textDecoration: 'none', color: 'black' }}>
                 Signup
               </Link>
             </Button>
           )}
-          {window.location.href === 'http://localhost:3000/signup' ? (
+          {window.location.href === 'https://astma-alert-staging.herokuapp.com/signup' ? (
             <Button variant='contained' color='inherit' className='navLink'>
               <Link href='/' style={{ textDecoration: 'none', color: 'black' }}>
                 Login
