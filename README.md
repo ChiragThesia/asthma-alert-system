@@ -3,7 +3,7 @@
 Project was created to demonstrate technical abilities for the Sana Benefits.
 
 ### Live version
-Live version of this project can be found [here](https://asthma-alert-production.herokuapp.com/)
+Live version of this project can be found [here](https://airquality-tracking.herokuapp.com/)
 
 ## Code repository
 - [Clien Code](https://github.com/ChiragThesia/asthma-alert-system)
