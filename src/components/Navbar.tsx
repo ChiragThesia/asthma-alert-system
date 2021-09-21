@@ -10,7 +10,7 @@ const NavBar = (props) => {
   const handleLogout = () => {
     localStorage.clear();
   };
-  const URL = 'https://asthma-alert.herokuapp.com';
+  const URL = 'https://airquality-tracking.herokuapp.com';
 
   return (
     <div className='navbar'>
