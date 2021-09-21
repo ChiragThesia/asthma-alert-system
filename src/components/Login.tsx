@@ -42,7 +42,7 @@ export default function Login() {
 
   const userSignup = () => {
     axios
-      .post('http://localhost:8080/api/users/login', { user })
+      .post('https://alert-asthma-server-staging.herokuapp.com/api/users/login', { user })
       .then((response) => {
         localStorage.setItem('token', response.data.user.token);
         localStorage.setItem('userID', response.data.user.id);

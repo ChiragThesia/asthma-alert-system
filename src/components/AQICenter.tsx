@@ -16,7 +16,7 @@ const AQIData = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/aqi/getAQIdata/${userID}`, {
+      .get(`https://alert-asthma-server-staging.herokuapp.com/api/aqi/getAQIdata/${userID}`, {
         headers: {
           authorization: token,
         },

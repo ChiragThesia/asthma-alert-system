@@ -49,7 +49,7 @@ export default function Signup() {
 
   const userSignup = () => {
     axios
-      .post('http://localhost:8080/api/users/signup', { user })
+      .post('https://alert-asthma-server-staging.herokuapp.com/api/users/signup', { user })
       .then((response) => {
         localStorage.setItem('token', response.data.user.token);
         localStorage.setItem('userID', response.data.user.id);
