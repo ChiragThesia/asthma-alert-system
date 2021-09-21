@@ -10,7 +10,8 @@ const NavBar = (props) => {
   const handleLogout = () => {
     localStorage.clear();
   };
-  const URL = 'https://asthma-alert-production.herokuapp.com/';
+  const URL = 'https://asthma-alert.herokuapp.com';
+
   return (
     <div className='navbar'>
       <AppBar position='static'>
