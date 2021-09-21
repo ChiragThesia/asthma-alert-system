@@ -24,18 +24,18 @@ const AQIData = () => {
     message: '',
   });
 
-  const [user, setUser] = useState<State>({
-    username: '',
-    email: '',
-    password: '',
-    aqiAlertLevel: 0,
-    location: '',
-    showPassword: false,
-  });
+  // const [user, setUser] = useState<State>({
+  //   username: '',
+  //   email: '',
+  //   password: '',
+  //   aqiAlertLevel: 0,
+  //   location: '',
+  //   showPassword: false,
+  // });
 
-  const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [prop]: event.target.value });
-  };
+  // const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setUser({ ...user, [prop]: event.target.value });
+  // };
 
   useEffect(() => {
     axios.defaults.baseURL = 'https://asthma-alert-server-production.herokuapp.com/';
@@ -62,27 +62,27 @@ const AQIData = () => {
     // eslint-disable-next-line
   }, [userID, token]);
 
-  const updatedUserPref = () => {
-    console.log('USER', user);
+  // const updatedUserPref = () => {
+  //   console.log('USER', user);
 
-    axios.defaults.baseURL = 'https://asthma-alert-server-production.herokuapp.com/';
-    axios
-      .put(
-        `/api/users/updateUser/${userID}`,
-        { user },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      )
-      .then((response) => {
-        console.log('response', response.data.user);
-      })
-      .catch((error) => {
-        console.log('ERROR', error);
-      });
-  };
+  //   axios.defaults.baseURL = 'https://asthma-alert-server-production.herokuapp.com/';
+  //   axios
+  //     .put(
+  //       `/api/users/updateUser/${userID}`,
+  //       { user },
+  //       {
+  //         headers: {
+  //           authorization: token,
+  //         },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       console.log('response', response.data.user);
+  //     })
+  //     .catch((error) => {
+  //       console.log('ERROR', error);
+  //     });
+  // };
 
   return (
     <div>
@@ -90,10 +90,11 @@ const AQIData = () => {
         <div className='aqiData'>
           <fieldset>
             <h1>{aqiData.message}</h1>
-            <h3 style={aqiData.aqi > aqiData.aqiPref ? { color: 'red' } : { color: 'green' }}>
-              {aqiData.location.toUpperCase()}'s air quality level is {aqiData.aqi} which is &nbsp;
-              {aqiData.aqi > aqiData.aqiPref ? 'higher' : 'lower'} then your alert level of {aqiData.aqiPref}
-            </h3>
+            <h3>{aqiData.location.toUpperCase()}</h3>
+            <h3>Air Quality = {aqiData.aqi} &nbsp;</h3>
+            <h2 style={aqiData.aqi > aqiData.aqiPref ? { color: 'red' } : { color: 'green' }}>
+              {aqiData.aqi > aqiData.aqiPref ? '👆' : '👇'} then your set threshold of {aqiData.aqiPref}
+            </h2>
           </fieldset>
           {/* 
           <form

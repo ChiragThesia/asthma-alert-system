@@ -19,17 +19,18 @@ const NavBar = (props) => {
 
           {localStorage.getItem('token') && (
             <Button variant='contained' color='inherit' className='navLink'>
-              <Link href='/login' style={{ textDecoration: 'none', color: 'black' }} onClick={handleLogout}>
+              <Link href='/' style={{ textDecoration: 'none', color: 'black' }} onClick={handleLogout}>
                 Logout
               </Link>
             </Button>
           )}
-
-          <Button variant='contained' color='inherit' className='navLink'>
-            <Link href='/signup' style={{ textDecoration: 'none', color: 'black' }}>
-              Signup
-            </Link>
-          </Button>
+          {!localStorage.getItem('token') && (
+            <Button variant='contained' color='inherit' className='navLink'>
+              <Link href='/signup' style={{ textDecoration: 'none', color: 'black' }}>
+                Signup
+              </Link>
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>

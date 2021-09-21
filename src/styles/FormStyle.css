@@ -25,4 +25,8 @@
 .signupForm .error {
   color: red;
 }
-/*# sourceMappingURL=Signup.css.map */
+
+.loginTitle {
+  text-align: center;
+}
+/*# sourceMappingURL=FormStyle.css.map */

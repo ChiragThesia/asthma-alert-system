@@ -10,7 +10,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import '../styles/Signup.css';
+import '../styles/FormStyle.css';
 
 interface State {
   email: string;
@@ -61,6 +61,7 @@ export default function Login() {
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }} className='formBox'>
       <fieldset>
+        <h2 className='loginTitle'>Login for Air Quality Data</h2>
         <form
           onSubmit={(event) => {
             event.preventDefault();

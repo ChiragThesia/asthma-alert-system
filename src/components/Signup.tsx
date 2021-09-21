@@ -10,7 +10,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import '../styles/Signup.css';
+import '../styles/FormStyle.css';
 
 interface State {
   username: string;
