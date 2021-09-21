@@ -10,6 +10,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import '../styles/Signup.css';
 
 interface State {
   email: string;
@@ -23,6 +24,7 @@ export default function Login() {
     password: '',
     showPassword: false,
   });
+  const [error, setError] = useState('');
   const history = useHistory();
 
   const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,12 +47,14 @@ export default function Login() {
     axios
       .post('/api/users/login', { user })
       .then((response) => {
+        console.log('response', response);
         localStorage.setItem('token', response.data.user.token);
         localStorage.setItem('userID', response.data.user.id);
         history.push('/aqi');
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((response) => {
+        console.log('RESPONSE', response);
+        setError('Please input correct credentials');
       });
   };
 
@@ -64,6 +68,7 @@ export default function Login() {
           }}
           className='signupForm'
         >
+          <h4 className='error'>{error}</h4>
           <div>
             <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
               <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>

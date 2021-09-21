@@ -21,4 +21,8 @@
 .signupForm .createUserButton {
   margin-top: 20px;
 }
+
+.signupForm .error {
+  color: red;
+}
 /*# sourceMappingURL=Signup.css.map */

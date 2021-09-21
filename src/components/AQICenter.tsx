@@ -4,6 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import '../styles/AqiData.css';
 
 interface State {
   username: string;
@@ -67,6 +68,7 @@ const AQIData = () => {
 
   const updatedUserPref = () => {
     console.log('USER', user);
+
     axios.defaults.baseURL = 'http://localhost:8080';
     axios
       .put(
@@ -87,61 +89,63 @@ const AQIData = () => {
   };
 
   return (
-    <>
-      <fieldset>
-        <h1>{aqiData.message}</h1>
-        {aqiData.aqi !== 0 && (
-          <h3 style={aqiData.aqi > aqiData.aqiPref ? { color: 'red' } : { color: 'green' }}>
-            {aqiData.location.toUpperCase()}'s air quality level is {aqiData.aqi} which is &nbsp;
-            {aqiData.aqi > aqiData.aqiPref ? 'higher' : 'lower'} then your alert level of {aqiData.aqiPref}
-          </h3>
-        )}
+    <div>
+      {aqiData.aqi !== 0 && (
+        <div className='aqiData'>
+          <fieldset>
+            <h1>{aqiData.message}</h1>
+            <h3 style={aqiData.aqi > aqiData.aqiPref ? { color: 'red' } : { color: 'green' }}>
+              {aqiData.location.toUpperCase()}'s air quality level is {aqiData.aqi} which is &nbsp;
+              {aqiData.aqi > aqiData.aqiPref ? 'higher' : 'lower'} then your alert level of {aqiData.aqiPref}
+            </h3>
+          </fieldset>
 
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            updatedUserPref();
-          }}
-          className='signupForm'
-        >
-          <div>
-            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-              <InputLabel htmlFor='outlined-adornment-aqiAlertlevel'>AQI Alert Level</InputLabel>
-              <OutlinedInput
-                id='outlined-adornment-aqiAlertlevel'
-                value={user.aqiAlertLevel}
-                onChange={handleChange('aqiAlertLevel')}
-                aria-describedby='outlined-aqiAlertlevel-helper-text'
-                inputProps={{
-                  'aria-label': 'aqiAlertlevel',
-                }}
-                label='AQI Alert Level'
-                required
-                type='number'
-              />
-            </FormControl>
-            <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-              <InputLabel htmlFor='outlined-adornment-location'>Location</InputLabel>
-              <OutlinedInput
-                id='outlined-adornment-location'
-                value={user.location}
-                onChange={handleChange('location')}
-                aria-describedby='outlined-location-helper-text'
-                inputProps={{
-                  'aria-label': 'location',
-                }}
-                label='Location'
-                required
-                placeholder={aqiData.location.toUpperCase()}
-              />
-            </FormControl>
-          </div>
-          <Button variant='contained' type='submit' className='SubmitChange'>
-            Updated Preferences
-          </Button>
-        </form>
-      </fieldset>
-    </>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              updatedUserPref();
+            }}
+            className='signupForm'
+          >
+            <div>
+              <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+                <InputLabel htmlFor='outlined-adornment-aqiAlertlevel'>AQI Alert Level</InputLabel>
+                <OutlinedInput
+                  id='outlined-adornment-aqiAlertlevel'
+                  value={user.aqiAlertLevel}
+                  onChange={handleChange('aqiAlertLevel')}
+                  aria-describedby='outlined-aqiAlertlevel-helper-text'
+                  inputProps={{
+                    'aria-label': 'aqiAlertlevel',
+                  }}
+                  label='AQI Alert Level'
+                  required
+                  type='number'
+                />
+              </FormControl>
+              <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
+                <InputLabel htmlFor='outlined-adornment-location'>Location</InputLabel>
+                <OutlinedInput
+                  id='outlined-adornment-location'
+                  value={user.location}
+                  onChange={handleChange('location')}
+                  aria-describedby='outlined-location-helper-text'
+                  inputProps={{
+                    'aria-label': 'location',
+                  }}
+                  label='Location'
+                  required
+                  placeholder={aqiData.location.toUpperCase()}
+                />
+              </FormControl>
+            </div>
+            <Button variant='contained' type='submit' className='SubmitChange'>
+              Updated Preferences
+            </Button>
+          </form>
+        </div>
+      )}
+    </div>
   );
 };
 
