@@ -10,7 +10,8 @@ const NavBar = (props) => {
   const handleLogout = () => {
     localStorage.clear();
   };
-  const URL = 'https://airquality-tracking.herokuapp.com';
+  // const URL = 'https://airquality-tracking.herokuapp.com';
+  const URL = 'http://localhost:3000';
 
   return (
     <div className='navbar'>
