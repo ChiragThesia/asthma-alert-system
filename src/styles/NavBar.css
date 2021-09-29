@@ -2,17 +2,21 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  top: 0;
-  width: 100%;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  width: 80vw;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .navbar .navLink {
   border: 1px solid black;
   color: black;
-  text-decoration: none;
   padding: 0 12px 0 12px;
   height: 30px;
 }
@@ -24,9 +28,10 @@
 }
 
 .navbar .title {
-  margin-right: 890px;
+  font-weight: bold;
+  font-size: 1.2rem;
   letter-spacing: 1px;
-  padding-right: 450px;
-  padding-left: 50px;
+  text-align: center;
+  padding-right: 55vw;
 }
 /*# sourceMappingURL=NavBar.css.map */

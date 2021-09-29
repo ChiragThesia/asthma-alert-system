@@ -10,13 +10,14 @@ const NavBar = (props) => {
   const handleLogout = () => {
     localStorage.clear();
   };
-  const URL = 'https://airquality-tracking.herokuapp.com';
+  // const URL = 'https://airquality-tracking.herokuapp.com';
+  const URL = 'http://localhost:3000';
 
   return (
     <div className='navbar'>
       <AppBar position='static'>
         <Toolbar>
-          <h2 className='title'>AirQuality Alert System</h2>
+          <p className='title'>AirQuality Alert System</p>
           {window.location.href === `${URL}/aqi` ? (
             <Button variant='contained' color='inherit' className='navLink'>
               <Link href='/' style={{ textDecoration: 'none', color: 'black' }} onClick={handleLogout}>
