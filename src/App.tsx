@@ -8,6 +8,7 @@ import './styles/App.css';
 import PrivateRoute from './util/privateRoute';
 
 function App() {
+  //TEST
   return (
     <div className='App'>
       <Router>
